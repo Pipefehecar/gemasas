@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VehiculoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/vehiculos', [VehiculoController::class, 'index']);
+// Route::get('vehiculos/create', [ArticuloController::class, 'create']);
+// Route::post('vehiculos/store', [ArticuloController::class, 'store']);
+// Route::post('vehiculos/{{$id}}/edit', [ArticuloController::class, 'edit']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
