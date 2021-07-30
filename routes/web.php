@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehiculoController;
 
+use App\Exports\VehiculosExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +21,12 @@ use App\Http\Controllers\VehiculoController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('vehiculos/descarga', function () {
+    return Excel::download(new VehiculosExport, 'vehiculos.xlsx');
+    
+});
+
 
 Route::resource('vehiculos', VehiculoController::class);
 

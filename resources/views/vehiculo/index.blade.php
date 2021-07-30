@@ -38,4 +38,5 @@
         @endforeach
     </tbody>
 </table>
+<a href="/vehiculos/descarga" class="btn btn-primary">descargar listado</a>
 @endsection
