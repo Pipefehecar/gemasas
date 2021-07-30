@@ -18,10 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/vehiculos', [VehiculoController::class, 'index']);
-// Route::get('vehiculos/create', [ArticuloController::class, 'create']);
-// Route::post('vehiculos/store', [ArticuloController::class, 'store']);
-// Route::post('vehiculos/{{$id}}/edit', [ArticuloController::class, 'edit']);
+Route::resource('vehiculos', VehiculoController::class);
+
+// Route::get('/vehiculos', [VehiculoController::class, 'index']);
+// Route::get('vehiculos/create', [VehiculoController::class, 'create']);
+Route::post('vehiculos/store', [VehiculoController::class, 'store']);
+// Route::PUT('vehiculos/edit/{$id}', [VehiculoController::class, 'edit']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

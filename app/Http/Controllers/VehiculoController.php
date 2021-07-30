@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehiculo;
+use App\Models\Estado;
 
 
 class VehiculoController extends Controller
@@ -26,7 +27,8 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        //
+        $estados = Estado::all();
+        return view('vehiculo.create' , compact('estados'));
     }
 
     /**
@@ -37,7 +39,21 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehiculos = new Vehiculo();
+        $vehiculos->placa = $request->get('placa');
+        $vehiculos->telefono = $request->get('telefono');
+        $vehiculos->color = $request->get('color');
+        if ($request->get('estado')=='ACTIVO' or $request->get('estado')=='activo') {
+            $vehiculos->estado_id = 1;
+        }else {
+            $vehiculos->estado_id = 2;
+        }
+        
+        
+
+        $vehiculos->save();
+
+        return redirect('/vehiculos');
     }
 
     /**
@@ -59,7 +75,10 @@ class VehiculoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vehiculo = Vehiculo::find($id);
+        $estados = Estado::all();
+        return view('vehiculo.edit',compact('vehiculo','estados'));
+        // return view('vehiculo.edit')->with('vehiculo',$vehiculo);
     }
 
     /**
@@ -71,7 +90,20 @@ class VehiculoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vehiculo = Vehiculo::find($id);
+        $vehiculo->placa = $request->get('placa');
+        $vehiculo->telefono = $request->get('telefono');
+        $vehiculo->color = $request->get('color');
+        if ($request->get('estado')=='ACTIVO' or $request->get('estado') =='activo') {
+            $vehiculo->estado_id = 1;
+        }if($request->get('estado')=='INACTIVO' or $request->get('estado') =='inactivo'){
+            $vehiculo->estado_id = 2;
+        }
+        
+        
+
+        $vehiculo->save();
+        return redirect('/vehiculos');
     }
 
     /**
@@ -80,8 +112,12 @@ class VehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vehiculo $vehiculo)
     {
-        //
+        $vehiculo->delete();
+
+       return redirect()->route('vehiculos.index')
+                       ->with('success','vehiculo eliminado');
     }
+    
 }

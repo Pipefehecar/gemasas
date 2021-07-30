@@ -3,28 +3,41 @@
 @section('contenido')
 <h1>Editar productos</h1>
 
-    <form action="/articulos/{{$articulos->id}}/update" method="POST">
-        @method('PUT')
+    <form action="{{ route('vehiculos.update',$vehiculo->id) }}" method="POST">
+        {{-- @method('PUT') --}}
         @csrf
+          @method('PUT')
         <div class="mb-3">
-          <label for="" class="form-label">Codigo</label>
-          <input  id="codigo" name="codigo" type="text" class="form-control" tabindex="1" value="{{$articulo->codigo}}">
-          {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+          <label for="" class="form-label">placa</label>
+          <input  id="placa" name="placa" type="text" class="form-control" tabindex="1" value="{{$vehiculo->placa}}">
+         
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Descripcion</label>
-            <input  id="descripcion" name="descripcion" type="text" class="form-control" tabindex="2" {{$articulo->descripcion}}>
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="" class="form-label">telefono</label>
+            <input  id="telefono" name="telefono" type="text" class="form-control" tabindex="2" value="{{$vehiculo->telefono}}">
+           
           </div>
           <div class="mb-3">
-            <label for="" class="form-label">Cantidad</label>
-            <input  id="cantidad" name="cantidad" type="number" class="form-control" tabindex="3" {{$articulo->cantidad}}>
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="" class="form-label">color</label>
+            <input  id="color" name="color" type="text" class="form-control" tabindex="3" value="{{$vehiculo->color}}">
+            
           </div>
+          {{-- <div class="mb-3">
+            <label for="" class="form-label">estado</label>
+            <input  id="estado" name="estado" type="number" step="any" value="0.00" class="form-control" tabindex="1" {{$articulo->estado}}>
+           
+          </div> --}}
           <div class="mb-3">
-            <label for="" class="form-label">Precio</label>
-            <input  id="precio" name="precio" type="number" step="any" value="0.00" class="form-control" tabindex="1" {{$articulo->precio}}>
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="tipoServicio">Seleccione el servicio</label>
+                            <select class="form-control" id="tipoServicio" name="servicio">
+                                @if (isset($estados))
+                                    @foreach ($estados as $estado)
+                                    <option>{{$estado->nombre}}</option>
+                                    @endforeach  
+                                @else
+                                <option>no encontre</option>
+                                @endif
+                            </select>
           </div>
         
        <a href="/articulos" class="btn btn-secondary" tabindex="5">Cancelar</a>

@@ -3,7 +3,7 @@
 @section('contenido')
 <h1>Listado de productos</h1>
 
-<a href="vehiculos/create" class="btn btn-primary">Crear</a>
+<a href="{{ route('vehiculos.create') }}" class="btn btn-primary">Crear</a>
 
 <table class="table table-dark table-striped mt-4">
     <thead>
@@ -22,11 +22,16 @@
                 <td>{{$vehiculo->placa}}</td>
                 <td>{{$vehiculo->telefono}}</td>
                 <td>{{$vehiculo->color}}</td>
-                {{-- <td>{{$vehiculo->estado.nombre}}</td> --}}
+                <td>{{$vehiculo->estado->nombre}}</td>
                 
                 <td>
-                    {{-- <a href="vehiculos/{{$articulo->id}}/edit" class="btn btn-info" >editar</a> --}}
-                    <button class="btn btn-danger">borrar</button>
+                    <a href="{{ route('vehiculos.edit',$vehiculo->id) }}" class="btn btn-info" >editar</a>
+                    <form action="{{ route('vehiculos.destroy',$vehiculo->id) }}" method="POST">
+   
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
     
             </tr>

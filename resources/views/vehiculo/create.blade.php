@@ -3,27 +3,34 @@
 @section('contenido')
 <h1>Crear productos</h1>
 
-    <form action="/articulos/store" method="POST">
+    <form action="/vehiculos/store" method="POST">
         @csrf
         <div class="mb-3">
-          <label for="" class="form-label">Codigo</label>
-          <input  id="codigo" name="codigo" type="text" class="form-control" tabindex="1">
-          {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+          <label for="" class="form-label">placa</label>
+          <input  id="placa" name="placa" type="text" class="form-control" tabindex="1">
+          
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Descripcion</label>
-            <input  id="descripcion" name="descripcion" type="text" class="form-control" tabindex="2">
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="" class="form-label">telefono</label>
+            <input  id="telefono" name="telefono" type="text" class="form-control" tabindex="2">
+            
           </div>
           <div class="mb-3">
-            <label for="" class="form-label">Cantidad</label>
-            <input  id="cantidad" name="cantidad" type="number" class="form-control" tabindex="3">
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="" class="form-label">color</label>
+            <input  id="color" name="color" type="text" class="form-control" tabindex="3">
+            
           </div>
           <div class="mb-3">
-            <label for="" class="form-label">Precio</label>
-            <input  id="precio" name="precio" type="number" step="any" value="0.00" class="form-control" tabindex="1">
-            {{-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <label for="tipoServicio">Seleccione el servicio</label>
+                            <select class="form-control" id="estado" name="estado">
+                                @if (isset($estados))
+                                    @foreach ($estados as $estado)
+                                    <option>{{$estado->nombre}}</option>
+                                    @endforeach  
+                                @else
+                                <option>no encontre</option>
+                                @endif
+                            </select>
           </div>
         
        <a href="/articulos" class="btn btn-secondary" tabindex="5">Cancelar</a>

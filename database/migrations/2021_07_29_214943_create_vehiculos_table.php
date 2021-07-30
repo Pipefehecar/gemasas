@@ -18,7 +18,6 @@ class CreateVehiculosTable extends Migration
             $table->string('placa',10);
             $table->string('telefono',15);
             $table->string('color',20);
-            $table->string('id_estado',10);
             $table->unsignedBigInteger('estado_id');
 
             $table->foreign('estado_id')
